@@ -11,6 +11,7 @@ import {
 import Link from 'next/link';
 import { Member } from '@prisma/client';
 import { usePathname } from 'next/navigation';
+import PresenceDot from '@/components/PresenceDot';
 
 type Props = {
   member: Member;
@@ -29,11 +30,17 @@ export default function MemberSidebar({ member, navLinks }: Props) {
         alt="User profile main image"
         className="rounded-full mt-6 aspect-square object-cover"
       />
-      <CardBody>
+      <CardBody className="overflow-hidden">
         <div className="flex flex-col items-center">
-          <div className="text-2xl">
-            {member.name} ,{calculateAge(member.dateOfBirth)}
+          <div className="flex">
+            <div className="text-2xl">
+              {member.name} ,{calculateAge(member.dateOfBirth)}
+            </div>
+            <div>
+              <PresenceDot member={member} />
+            </div>
           </div>
+
           <div className="text-sm text-neutral-500">
             {member.city},{member.country}
           </div>

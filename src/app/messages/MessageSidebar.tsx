@@ -6,8 +6,10 @@ import { MdOutlineOutbox } from 'react-icons/md';
 import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { useState } from 'react';
 import { Chip } from '@nextui-org/react';
+import useMessageStore from '@/hooks/useMessageStore';
 
 export default function MessageSidebar() {
+  const unreadCount = useMessageStore((state) => state.unreadCount);
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const router = useRouter();
@@ -40,7 +42,7 @@ export default function MessageSidebar() {
           <Icon size={24} />
           <div className="flex justify-between flex-grow">
             <span className="flex justify-between flex-grow">{label}</span>
-            {chip && <Chip>5</Chip>}
+            {chip && <Chip>{unreadCount}</Chip>}
           </div>
         </div>
       ))}
