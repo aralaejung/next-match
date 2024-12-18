@@ -8,15 +8,17 @@ export default async function MessagesPage({
 }: {
   searchParams: { container: string };
 }) {
-  const message = await getMessageByContainer(searchParams.container);
-  console.log(message);
+  const { messages, nextCursor } = await getMessageByContainer(
+    searchParams.container
+  );
+  console.log(messages);
   return (
     <div className="grid grid-cols-12 gap-5 h-[80vh] mt-10">
       <div className="col-span-2">
         <MessageSidebar />
       </div>
       <div className="col-span-10">
-        <MessageTable initialMessages={message} />
+        <MessageTable initialMessages={messages} nextCursor={nextCursor} />
       </div>
     </div>
   );

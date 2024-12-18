@@ -7,6 +7,8 @@ import { auth } from '@/auth';
 import UserMenu from './UserMenu';
 import { getUserInfoForNav } from '@/app/actions/userAction';
 
+import FiltersWrapper from './FiltersWrapper';
+
 export default async function TopNav() {
   const session = await auth();
   const userInfo = session?.user && (await getUserInfoForNav());
@@ -61,6 +63,7 @@ export default async function TopNav() {
           )}
         </NavbarContent>
       </Navbar>
+      <FiltersWrapper />
     </>
   );
 }
