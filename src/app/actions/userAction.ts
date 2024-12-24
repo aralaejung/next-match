@@ -78,6 +78,7 @@ export async function setMainImage(photo: Photo) {
       where: { id: userId },
       data: { image: photo.url },
     });
+
     return prisma.member.update({
       where: { userId },
       data: { image: photo.url },

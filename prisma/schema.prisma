@@ -38,8 +38,9 @@ model User {
   name          String?
   email         String?   @unique
   emailVerified DateTime? @map("email_verified")
-  passwordHash  String
+  passwordHash  String?
   image         String?
+  profileComplete Boolean   @default(false)
   accounts      Account[]
   member        Member?
 
@@ -100,3 +101,18 @@ model User {
   recipientDeleted Boolean   @default(false)
 }
 
+
+model Token {
+  id      String    @id @default(cuid())
+  email   String
+  token   String
+  expires DateTime
+  type    TokenType
+
+  @@unique([email, token])
+}
+
+enum TokenType {
+  VERIFICATION
+  PASSWORD_RESET
+}
