@@ -31,7 +31,7 @@ export default function UserMenu({ userInfo }: Props) {
           src={transformImageUrl(userInfo?.image) || '/images/user.png'}
         />
       </DropdownTrigger>
-      <DropdownMenu variant="flat" aria-label="User action menu">
+      <DropdownMenu variant="flat" aria-label="User actions menu">
         <DropdownSection showDivider>
           <DropdownItem
             isReadOnly
@@ -49,7 +49,6 @@ export default function UserMenu({ userInfo }: Props) {
           Log out
         </DropdownItem>
       </DropdownMenu>
-      UserMenu
     </Dropdown>
   );
 }

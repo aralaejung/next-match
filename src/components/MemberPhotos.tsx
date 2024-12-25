@@ -7,6 +7,7 @@ import StarButton from './StarButton';
 import DeleteButton from './navbar/DeleteButton';
 import { useState } from 'react';
 import { deleteImage, setMainImage } from '@/app/actions/userAction';
+import { toast } from 'react-toastify';
 
 type Props = {
   photos: Photo[] | null;
@@ -25,9 +26,16 @@ export default function MemberPhotos({ photos, editing, mainImageUrl }: Props) {
   const onSetMain = async (photo: Photo) => {
     if (photo.url === mainImageUrl) return null;
     setLoading({ isLoading: true, id: photo.id, type: 'main' });
-    await setMainImage(photo);
-    router.refresh();
-    setLoading({ isLoading: false, id: '', type: '' });
+    try {
+      await setMainImage(photo);
+      router.refresh();
+      setLoading({ isLoading: false, id: '', type: '' });
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    } catch (error: any) {
+      toast.error(error.message);
+    } finally {
+      setLoading({ isLoading: false, id: '', type: '' });
+    }
   };
 
   const onDelete = async (photo: Photo) => {
